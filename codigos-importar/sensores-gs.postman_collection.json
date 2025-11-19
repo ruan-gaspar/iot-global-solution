@@ -1,0 +1,28 @@
+{
+	"info": {
+		"_postman_id": "0285e14b-dca8-49dd-9914-212cc172caef",
+		"name": "sensores-gs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "44972528"
+	},
+	"item": [
+		{
+			"name": "dados-sensor",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": "url-do-ngrok/api/sensores",
+			},
+			"response": []
+		}
+	]
+}
