@@ -57,12 +57,25 @@ void loop() {
 
   float temperature = random(200, 350) / 10.0;
   float humidity = random(300, 850) / 10.0;
+  float co  = random(0, 1000) / 10.0;   
+  float co2 = random(400, 2000) / 1.0; 
+  float ch4 = random(0, 5000) / 10.0;   
+  float h2s = random(0, 100) / 1.0;     
 
   String payload = "{\"temperatura\":";
   payload += temperature;
   payload += ",\"umidade\":";
   payload += humidity;
+  payload += ",\"co\":";
+  payload += co;
+  payload += ",\"co2\":";
+  payload += co2;
+  payload += ",\"ch4\":";
+  payload += ch4;
+  payload += ",\"h2s\":";
+  payload += h2s;
   payload += "}";
+
 
   sensorFeed.publish(payload.c_str());
 

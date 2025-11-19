@@ -1,5 +1,3 @@
-
-
 [
     {
         "id": "b44ab710a3bcd9ba",
@@ -160,7 +158,7 @@
         "type": "mqtt in",
         "z": "b44ab710a3bcd9ba",
         "name": "",
-        "topic": "usuario_adafruit/feeds/sensores",
+        "topic": "seu_usuario/feeds/sensores",
         "qos": "0",
         "datatype": "auto-detect",
         "broker": "925b94acf6c79c58",
@@ -178,22 +176,6 @@
         ]
     },
     {
-        "id": "a9d886a9d16320ab",
-        "type": "debug",
-        "z": "b44ab710a3bcd9ba",
-        "name": "debug 3",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 540,
-        "y": 60,
-        "wires": []
-    },
-    {
         "id": "b117747143839679",
         "type": "json",
         "z": "b44ab710a3bcd9ba",
@@ -201,7 +183,7 @@
         "property": "payload",
         "action": "obj",
         "pretty": false,
-        "x": 250,
+        "x": 190,
         "y": 140,
         "wires": [
             [
@@ -233,8 +215,8 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 550,
-        "y": 100,
+        "x": 530,
+        "y": 20,
         "wires": []
     },
     {
@@ -242,23 +224,33 @@
         "type": "function",
         "z": "b44ab710a3bcd9ba",
         "name": "Função ",
-        "func": "let data = msg.payload;\n\nglobal.set('ultimoDadoSensor', data);\n\nlet msgTemp = { payload: data.temperatura };\n\nlet msgUmid = { payload: data.umidade };\n\nlet msgHttp = { payload: { temperatura: data.temperatura, umidade: data.umidade } };\n\nreturn [msgTemp, msgUmid, msgHttp];\n",
-        "outputs": 3,
+        "func": "let data = msg.payload;\n\nglobal.set('ultimoDadoSensor', data);\n\nlet msgTemp = { payload: data.temperatura };\n\nlet msgUmid = { payload: data.umidade };\n\nlet msgCO = { payload: data.co};\n\nlet msgCO2 = { payload: data.co2};\n\nlet msgCH4 = { payload: data.ch4 };\n\nlet msgH2S = { payload: data.h2s };\n\nlet msgHttp = { \n    payload: { \n        temperatura: data.temperatura, \n        umidade: data.umidade, \n        co: data.co,\n        co2: data.co2,\n        ch4: data.ch4, \n        h2s: data.h2s\n    } \n};\n\nreturn [msgTemp, msgUmid, msgCO, msgCO2, msgCH4, msgH2S, msgHttp];\n",
+        "outputs": 7,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 340,
-        "y": 200,
+        "y": 220,
         "wires": [
             [
-                "a9d886a9d16320ab",
                 "9b2d2af417c26b30"
             ],
             [
-                "8fdad0e051b0c08b",
                 "e56ed5c3425c7872"
+            ],
+            [
+                "b625339f22554e96"
+            ],
+            [
+                "1250338a3ae85d5e"
+            ],
+            [
+                "b99c37b89e3dd59c"
+            ],
+            [
+                "c10331de2d2abd73"
             ],
             [
                 "1adcd2db54875017"
@@ -277,24 +269,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 180,
-        "y": 20,
-        "wires": []
-    },
-    {
-        "id": "8fdad0e051b0c08b",
-        "type": "debug",
-        "z": "b44ab710a3bcd9ba",
-        "name": "debug 4",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 540,
-        "y": 140,
+        "x": 320,
+        "y": 40,
         "wires": []
     },
     {
@@ -322,7 +298,7 @@
         "diff": false,
         "className": "",
         "x": 540,
-        "y": 180,
+        "y": 60,
         "wires": []
     },
     {
@@ -333,7 +309,7 @@
         "method": "POST",
         "ret": "obj",
         "paytoqs": "ignore",
-        "url": "https://url-de-exemplo.com/api/sensores",
+        "url": "https://url-publica-do-ngrok/api/sensores",
         "tls": "",
         "persist": false,
         "proxy": "",
@@ -348,8 +324,8 @@
                 "valueValue": ""
             }
         ],
-        "x": 460,
-        "y": 260,
+        "x": 520,
+        "y": 280,
         "wires": [
             [
                 "a7cce2294cbe3161"
@@ -369,8 +345,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 630,
-        "y": 220,
+        "x": 710,
+        "y": 240,
         "wires": []
     },
     {
@@ -384,7 +360,7 @@
         "skipBodyParsing": false,
         "swaggerDoc": "",
         "x": 110,
-        "y": 300,
+        "y": 320,
         "wires": [
             [
                 "22cab4050e1be57d",
@@ -399,7 +375,7 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 630,
+        "x": 470,
         "y": 340,
         "wires": []
     },
@@ -441,21 +417,6 @@
         "wires": []
     },
     {
-        "id": "7093b1252dfd9cb8",
-        "type": "json",
-        "z": "b44ab710a3bcd9ba",
-        "d": true,
-        "name": "",
-        "property": "payload",
-        "action": "obj",
-        "pretty": false,
-        "x": 350,
-        "y": 440,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "ec82102dabe0a87c",
         "type": "debug",
         "z": "b44ab710a3bcd9ba",
@@ -467,12 +428,124 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 500,
-        "y": 400,
+        "x": 480,
+        "y": 380,
         "wires": []
     },
     {
-        "id": "c99162aabc86a8e2",
+        "id": "b625339f22554e96",
+        "type": "ui_gauge",
+        "z": "b44ab710a3bcd9ba",
+        "name": "",
+        "group": "fd38b5ea93e5ad72",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "CO",
+        "label": "ppm",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 550,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "b99c37b89e3dd59c",
+        "type": "ui_gauge",
+        "z": "b44ab710a3bcd9ba",
+        "name": "",
+        "group": "fd38b5ea93e5ad72",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "CH4",
+        "label": "ppm",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "500",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 550,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "c10331de2d2abd73",
+        "type": "ui_gauge",
+        "z": "b44ab710a3bcd9ba",
+        "name": "",
+        "group": "fd38b5ea93e5ad72",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "H2S",
+        "label": "ppm",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 550,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "1250338a3ae85d5e",
+        "type": "ui_gauge",
+        "z": "b44ab710a3bcd9ba",
+        "name": "",
+        "group": "fd38b5ea93e5ad72",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "CO2",
+        "label": "ppm",
+        "format": "{{value}}",
+        "min": "400",
+        "max": "2000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 550,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "1618e4dd326e54dc",
         "type": "global-config",
         "env": [],
         "modules": {
